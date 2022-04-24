@@ -20,6 +20,10 @@ export class BoardsService {
   getAllBoards(): Promise<Board[]> {
     return this.boardRpository.find();
   }
+
+  getAllUserBoards(userId: number): Promise<Board[]> {
+    return this.boardRpository.getAllUserBoards(userId);
+  }
   //   createBoard(createBoardDto: CreateBoardDto) {
   //     const { title, description } = createBoardDto;
   //     const board: Board = {

@@ -34,6 +34,13 @@ export class BoardsController {
     return this.boardsService.getAllBoards();
   }
 
+  @Get('/user/:userId')
+  getAllUserBoards(
+    @Param('userId', ParseIntPipe) userId: number,
+  ): Promise<Board[]> {
+    return this.boardsService.getAllUserBoards(userId);
+  }
+
   //   @Post('/')
   //   @UsePipes(ValidationPipe)
   //   createBoard(@Body() createBoardDto: CreateBoardDto): Board {

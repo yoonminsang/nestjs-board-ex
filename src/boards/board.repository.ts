@@ -22,4 +22,14 @@ export class BoardRepository extends Repository<Board> {
     await this.save(board);
     return board;
   }
+
+  async getAllUserBoards(userId: number): Promise<Board[]> {
+    const query = this.createQueryBuilder('board');
+
+    query.where('board.userId = :userId', { userId });
+
+    const boards = await query.getMany();
+
+    return boards;
+  }
 }
