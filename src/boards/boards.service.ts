@@ -50,9 +50,23 @@ export class BoardsService {
   //     const found = this.getBoardById(id);
   //     this.boards = this.boards.filter((board) => board.id !== found.id);
   //   }
+  async deleteBoard(id: number): Promise<void> {
+    const result = await this.boardRpository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Can't find board with id ${id}`);
+    }
+  }
   //   updateBoardStatus(id: string, status: BoardStatus): Board {
   //     const board = this.getBoardById(id);
   //     board.status = status;
   //     return board;
   //   }
+  async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.boardRpository.findOne(id);
+
+    board.status = status;
+    await this.boardRpository.save(board);
+
+    return board;
+  }
 }
